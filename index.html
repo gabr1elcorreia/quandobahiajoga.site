@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador Regressivo</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0000FF;
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+    }
+
+    #escudo {
+      width: 150px; /* Ajuste conforme necessário */
+      height: 150px; /* Ajuste conforme necessário */
+      margin-top: 20px; /* Espaçamento do topo */
+    }
+
+    #titulo-contador {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #contador {
+      background-color: #FFFFFF;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      color: #000000;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .quadrado {
+      width: 80px;
+      height: 80px;
+      background-color: #FF0000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .quadrado:hover {
+      transform: scale(1.1);
+    }
+
+    .quadrado:nth-child(even) {
+      background-color: #0000FF;
+    }
+
+    .numero-grande {
+      font-size: 32px;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .descricao-pequena {
+      font-size: 14px;
+      margin-top: 5px;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    #footer {
+      margin-top: 10px; /* Ajuste de espaçamento superior */
+      margin-bottom: 20px; /* Espaçamento do rodapé */
+      font-size: 14px;
+      position: relative;
+    }
+
+    #criado-por-barra {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #FFFFFF;
+      bottom: -12px; /* Distância da barra em relação ao texto */
+    }
+
+    #criado-por-texto {
+      font-weight: bold;
+    }
+
+    #twitter-link {
+      color: #FFFFFF;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    #twitter-link:hover {
+      color: #00FFFF; /* Cor ao passar o mouse */
+    }
+  </style>
+</head>
+<body>
+  <img id="escudo" src="https://i.imgur.com/eZcyeS7.gif" alt="Escudo do Bahia">
+
+  <div id="titulo-contador">
+    <h1>Tempo que falta para o próximo jogo do Bahia:</h1>
+
+    <div id="contador">
+      <div class="quadrado numero-grande" id="meses">0
+        <div class="descricao-pequena">Mês</div>
+      </div>
+      <div class="quadrado numero-grande" id="semanas">0
+        <div class="descricao-pequena">Semana</div>
+      </div>
+      <div class="quadrado numero-grande" id="dias">0
+        <div class="descricao-pequena">Dia</div>
+      </div>
+      <div class="quadrado numero-grande" id="horas">0
+        <div class="descricao-pequena">Hora</div>
+      </div>
+      <div class="quadrado numero-grande" id="minutos">0
+        <div class="descricao-pequena">Minuto</div>
+      </div>
+      <div class="quadrado numero-grande" id="segundos">0
+        <div class="descricao-pequena">Segundo</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div id="criado-por-barra"></div>
+    <span id="criado-por-texto">Criado por:</span>
+    <span id="twitter-link" onclick="window.open('https://twitter.com/gabr1elcorreia', '_blank')"> @gabr1elcorreia</span>
+  </div>
+
+  <script>
+    // Data do próximo jogo do Bahia (17/01/2024)
+    var dataJogoBahia = new Date('2024-01-17T00:00:00');
+
+    function atualizarContador() {
+      var agora = new Date();
+      var diferenca = dataJogoBahia - agora;
+
+      var segundos = Math.floor(diferenca / 1000) % 60;
+      var minutos = Math.floor(diferenca / (1000 * 60)) % 60;
+      var horas = Math.floor(diferenca / (1000 * 60 * 60)) % 24;
+      var dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+      var semanas = Math.floor(dias / 7);
+      var meses = Math.floor(semanas / 4);
+
+      document.getElementById('meses').innerHTML = meses +
+        '<div class="descricao-pequena">Mês' + (meses !== 1 ? 'es' : '') + '</div>';
+      document.getElementById('semanas').innerHTML = semanas +
+        '<div class="descricao-pequena">Semana' + (semanas !== 1 ? 's' : '') + '</div>';
+      document.getElementById('dias').innerHTML = dias +
+        '<div class="descricao-pequena">Dia' + (dias !== 1 ? 's' : '') + '</div>';
+      document.getElementById('horas').innerHTML = horas +
+        '<div class="descricao-pequena">Hora' + (horas !== 1 ? 's' : '') + '</div>';
+      document.getElementById('minutos').innerHTML = minutos +
+        '<div class="descricao-pequena">Minuto' + (minutos !== 1 ? 's' : '') + '</div>';
+      document.getElementById('segundos').innerHTML = segundos +
+        '<div class="descricao-pequena">Segundo' + (segundos !== 1 ? 's' : '') + '</div>';
+    }
+
+    // Atualizar o contador a cada segundo
+    setInterval(atualizarContador, 1000);
+
+    // Adicionar animação suave nos números
+    document.querySelectorAll('.numero-grande, .descricao-pequena').forEach(element => {
+      element.addEventListener('mouseover', () => {
+        element.style.opacity = '0.7';
+      });
+
+      element.addEventListener('mouseout', () => {
+        element.style.opacity = '1';
+      });
+    });
+
+    // Chamar a função pela primeira vez para evitar atrasos
+    atualizarContador();
+  </script>
+</body>
+</html>

@@ -9,7 +9,108 @@
   <link rel="icon" type="image/png" href="favicon/favicon.png">
 
   <style>
-    /* Seu estilo CSS permanece inalterado */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0000FF;
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+    }
+
+    #escudo {
+      width: 100px; /* Ajuste conforme necessário */
+      height: 100px; /* Ajuste conforme necessário */
+      margin-top: 10px; /* Espaçamento do topo */
+    }
+
+    #titulo-contador {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #contador {
+      background-color: #FFFFFF;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      color: #FFFFFF;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .quadrado {
+      width: 80px;
+      height: 80px;
+      background-color: #FF0000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .quadrado:hover {
+      transform: scale(1.1);
+    }
+
+    .quadrado:nth-child(even) {
+      background-color: #0000FF;
+    }
+
+    .numero-grande {
+      font-size: 32px;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .descricao-pequena {
+      font-size: 14px;
+      margin-top: 5px;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    #footer {
+      margin-top: 10px; /* Ajuste de espaçamento superior */
+      margin-bottom: 20px; /* Espaçamento do rodapé */
+      font-size: 14px;
+      position: relative;
+    }
+
+    #criado-por-barra {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #FFFFFF;
+      bottom: -12px; /* Distância da barra em relação ao texto */
+    }
+
+    #criado-por-texto {
+      font-weight: bold;
+    }
+
+    #twitter-link {
+      color: #FFFFFF;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    #twitter-link:hover {
+      color: #00FFFF; /* Cor ao passar o mouse */
+    }
   </style>
 </head>
 <body>
@@ -79,5 +180,4 @@
     // Chamar a função pela primeira vez para evitar atrasos
     atualizarContador();
   </script>
-</body>
-</html>
+</

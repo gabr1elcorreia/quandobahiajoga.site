@@ -161,10 +161,6 @@
       var semanas = Math.floor(dias / 7);
       var meses = Math.floor(semanas / 4);
 
-      document.getElementById('meses').innerHTML = meses +
-        '<div class="descricao-pequena">Mês' + (meses !== 1 ? 'es' : '') + '</div>';
-      document.getElementById('semanas').innerHTML = semanas +
-        '<div class="descricao-pequena">Semana' + (semanas !== 1 ? 's' : '') + '</div>';
       document.getElementById('dias').innerHTML = dias +
         '<div class="descricao-pequena">Dia' + (dias !== 1 ? 's' : '') + '</div>';
       document.getElementById('horas').innerHTML = horas +

@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contador Regressivo</title>
-  <link rel="icon" type="image/png" href="favicon/favicon.png">
+  <title>Quando o Bahia joga?</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
     body {
       margin: 0;
       padding: 0;
-      background-color: #0000FF;
+      background-color: #0469ad;
       color: #FFFFFF;
       font-family: 'Montserrat', sans-serif;
       display: flex;
@@ -19,7 +19,23 @@
       align-items: center;
       justify-content: space-between;
       height: 100vh;
+      user-select: none;
+      overflow: hidden; /* Impede a barra de rolagem horizontal */
       position: relative;
+    }
+
+    /* Granulado no fundo */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect x='0' y='0' width='50' height='50' fill='%232b2b2b'/%3E%3Crect x='50' y='50' width='50' height='50' fill='%232b2b2b'/%3E%3Crect x='0' y='50' width='50' height='50' fill='%231e1e1e'/%3E%3Crect x='50' y='0' width='50' height='50' fill='%231e1e1e'/%3E%3C/svg%3E");
+      opacity: 0.10;
+      pointer-events: none;
     }
 
     #escudo {
@@ -28,57 +44,81 @@
       margin-top: 10px;
     }
 
-    #titulo-contador {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    #contador {
-      background-color: #FFFFFF;
+    #jogos {
+      background-color: rgba(0, 0, 0, 0.7);
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
       color: #FFFFFF;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .quadrado {
-      width: 80px;
-      height: 80px;
-      background-color: #FF0000;
-      display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      gap: 15px;
+      margin-top: auto;
+      margin-bottom: auto;
+      backdrop-filter: blur(10px);
+    }
+
+    .titulo {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .jogo {
+      width: 90%;
+      padding: 15px;
+      background-color: #0469ad;
+      color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
       border-radius: 8px;
       font-size: 16px;
-      font-weight: bold;
       transition: transform 0.3s ease-in-out;
     }
 
-    .quadrado:hover {
+    .jogo:hover {
       transform: scale(1.1);
     }
 
-    .quadrado:nth-child(even) {
-      background-color: #0000FF;
+    .jogo:nth-child(even) {
+      background-color: #055c96;
     }
 
-    .numero-grande {
-      font-size: 32px;
-      transition: opacity 0.3s ease-in-out;
+    .escudo {
+      width: 50px;
+      height: 50px;
     }
 
-    .descricao-pequena {
+    .times {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .time {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .adversario {
+      font-size: 18px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .data-horario {
       font-size: 14px;
-      margin-top: 5px;
-      transition: opacity 0.3s ease-in-out;
+      margin-bottom: 5px;
+    }
+
+    .tempo-falta {
+      font-size: 14px;
+      font-style: italic;
     }
 
     #footer {
@@ -109,65 +149,29 @@
     #twitter-link:hover {
       color: #00FFFF;
     }
-
-    #btn-proximo-jogo {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: #007BFF;
-      color: #FFFFFF;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s ease-in-out;
-    }
-
-    #btn-proximo-jogo:hover {
-      background-color: #0056b3;
-    }
-
-    #btn-contratar {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: #28a745;
-      color: #FFFFFF;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s ease-in-out;
-    }
-
-    #btn-contratar:hover {
-      background-color: #218838;
-    }
   </style>
 </head>
 <body>
-  <button id="btn-contratar" onclick="window.location.href='contratar.html'">A quantos dias Bahia não contrata</button>
-  <button id="btn-proximo-jogo" onclick="window.location.href='proximojogo.html'">Próximo Jogo do Bahia</button>
 
   <img id="escudo" src="https://i.imgur.com/eZcyeS7.gif" alt="Escudo do Bahia">
 
-  <div id="titulo-contador">
-    <h1>Tempo que falta para o próximo jogo do Bahia:</h1>
-    <div id="contador">
-      <div class="quadrado numero-grande" id="dias">0
-        <div class="descricao-pequena">Dia</div>
+  <div id="jogos">
+    <div class="titulo">Próximo jogo do Bahia:</div>
+    <div class="jogo">
+      <div class="times">
+        <div class="time">
+          <img class="escudo" src="https://s.sde.globo.com/media/organizations/2018/03/11/bahia.svg" alt="Escudo do Time 1">
+          <span> </span>
+        </div>
+        <span>x</span>
+        <div class="time">
+          <span> </span>
+          <img class="escudo" src="https://s.sde.globo.com/media/organizations/2019/01/08/Jequi%C3%A9.svg" alt="Escudo do Time 2">
+        </div>
       </div>
-      <div class="quadrado numero-grande" id="horas">0
-        <div class="descricao-pequena">Hora</div>
-      </div>
-      <div class="quadrado numero-grande" id="minutos">0
-        <div class="descricao-pequena">Minuto</div>
-      </div>
-      <div class="quadrado numero-grande" id="segundos">0
-        <div class="descricao-pequena">Segundo</div>
-      </div>
+      <br>
+      <div class="adversario">Bahia x Jequié</div>
+      <div class="data-horario">17/01/2024 — 21:30</div>
     </div>
   </div>
 
@@ -176,46 +180,5 @@
     <span id="criado-por-texto">Criado por:</span>
     <span id="twitter-link" onclick="window.open('https://twitter.com/gabr1elcorreia', '_blank')"> @gabr1elcorreia</span>
   </div>
-
-  <script>
-    // Data do próximo jogo do Bahia (17/01/2024)
-    var dataJogoBahia = new Date('2024-01-17T00:00:00');
-
-    function atualizarContador() {
-      var agora = new Date();
-      var diferenca = dataJogoBahia - agora;
-
-      var segundos = Math.floor(diferenca / 1000) % 60;
-      var minutos = Math.floor(diferenca / (1000 * 60)) % 60;
-      var horas = Math.floor(diferenca / (1000 * 60 * 60)) % 24;
-      var dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-
-      document.getElementById('dias').innerHTML = dias +
-        '<div class="descricao-pequena">Dia' + (dias !== 1 ? 's' : '') + '</div>';
-      document.getElementById('horas').innerHTML = horas +
-        '<div class="descricao-pequena">Hora' + (horas !== 1 ? 's' : '') + '</div>';
-      document.getElementById('minutos').innerHTML = minutos +
-        '<div class="descricao-pequena">Minuto' + (minutos !== 1 ? 's' : '') + '</div>';
-      document.getElementById('segundos').innerHTML = segundos +
-        '<div class="descricao-pequena">Segundo' + (segundos !== 1 ? 's' : '') + '</div>';
-    }
-
-    // Atualizar o contador a cada segundo
-    setInterval(atualizarContador, 1000);
-
-    // Adicionar animação suave nos números
-    document.querySelectorAll('.numero-grande, .descricao-pequena').forEach(element => {
-      element.addEventListener('mouseover', () => {
-        element.style.opacity = '0.7';
-      });
-
-      element.addEventListener('mouseout', () => {
-        element.style.opacity = '1';
-      });
-    });
-
-    // Chamar a função pela primeira vez para evitar atrasos
-    atualizarContador();
-  </script>
 </body>
 </html>
